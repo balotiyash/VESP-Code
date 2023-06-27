@@ -1,0 +1,254 @@
+package com.balotiyash.vespresult
+
+import android.content.Intent
+import android.net.Uri
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Card
+import androidx.compose.material.Text
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Divider
+import androidx.compose.material3.Icon
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.scale
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.balotiyash.vespresult.ui.theme.DarkYellow
+
+val fontFamily = FontFamily(Font(R.font.comicneue_regular))
+
+@Composable
+fun PrintInternalsPAText(name: String?, code: Int?, m: Int?, outoff: Int) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        if (name != null) {
+            Text(
+                text = name,
+                fontFamily = fontFamily,
+                fontSize = 20.sp
+            )
+            Text(
+                text = "($code)",
+                fontSize = 20.sp,
+                fontFamily = fontFamily,
+            )
+            Text(
+                text = "$m/$outoff",
+                fontFamily = fontFamily,
+                fontSize = 20.sp
+            )
+        }
+    }
+}
+
+@Composable
+fun PrintInternalsPA(
+    outoff: Int,
+    name1: String?, code1: Int?, m1: Int?,
+    name2: String?, code2: Int?, m2: Int?,
+    name3: String?, code3: Int?, m3: Int?,
+    name4: String?, code4: Int?, m4: Int?,
+    name5: String?, code5: Int?, m5: Int?,
+    name6: String?, code6: Int?, m6: Int?,
+    name7: String?, code7: Int?, m7: Int?,
+    name8: String?, code8: Int?, m8: Int?,
+    name9: String?, code9: Int?, m9: Int?,
+    name10: String?, code10: Int?, m10: Int?
+) {
+    if (name1 != null) {
+        PrintInternalsPAText(name = name1, code = code1, m = m1, outoff = outoff)
+    }
+    if (name2 != null) {
+        PrintInternalsPAText(name = name2, code = code2, m = m2, outoff = outoff)
+    }
+    if (name3 != null) {
+        PrintInternalsPAText(name = name3, code = code3, m = m3, outoff = outoff)
+    }
+    if (name4 != null) {
+        PrintInternalsPAText(name = name4, code = code4, m = m4, outoff = outoff)
+    }
+    if (name5 != null) {
+        PrintInternalsPAText(name = name5, code = code5, m = m5, outoff = outoff)
+    }
+    if (name6 != null) {
+        PrintInternalsPAText(name = name6, code = code6, m = m6, outoff = outoff)
+    }
+    if (name7 != null) {
+        PrintInternalsPAText(name = name7, code = code7, m = m7, outoff = outoff)
+    }
+    if (name8 != null) {
+        PrintInternalsPAText(name = name8, code = code8, m = m8, outoff = outoff)
+    }
+    if (name9 != null) {
+        PrintInternalsPAText(name = name9, code = code9, m = m9, outoff = outoff)
+    }
+    if (name10 != null) {
+        PrintInternalsPAText(name = name10, code = code10, m = m10, outoff = outoff)
+    }
+}
+
+@Composable
+fun InternalsPA(
+    outoff30: Int, outoff25: Int,
+    name1: String?, code1: Int?, m1: Int?, mm1: Int?,
+    name2: String?, code2: Int?, m2: Int?, mm2: Int?,
+    name3: String?, code3: Int?, m3: Int?, mm3: Int?,
+    name4: String?, code4: Int?, m4: Int?, mm4: Int?,
+    name5: String?, code5: Int?, m5: Int?, mm5: Int?,
+    name6: String?, code6: Int?, m6: Int?, mm6: Int?,
+    name7: String?, code7: Int?, m7: Int?, mm7: Int?,
+    name8: String?, code8: Int?, m8: Int?, mm8: Int?,
+    name9: String?, code9: Int?, m9: Int?, mm9: Int?,
+    name10: String?, code10: Int?, m10: Int?, mm10: Int?
+) {
+    Card(
+        modifier = Modifier
+            .padding(20.dp, 0.dp, 20.dp, 20.dp)
+            .shadow(
+                elevation = 8.dp,
+                shape = RoundedCornerShape(12.dp),
+                clip = true,
+                ambientColor = Color(0xFFFFC107),
+                spotColor = Color.Gray
+            )
+            .border(2.dp, DarkYellow, shape = RoundedCornerShape(12.dp))
+    ) {
+        Box {
+            Image(
+                painter = painterResource(id = R.drawable.result1),
+                contentDescription = null,
+                alpha = 0.2f,
+                modifier = Modifier
+                    .align(alignment = Alignment.Center)
+            )
+            Column(
+                modifier = Modifier
+                    .padding(horizontal = 8.dp)
+                    .fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    text = "Internals & PA",
+                    fontSize = 24.sp,
+                    modifier = Modifier
+                        .align(alignment = Alignment.CenterHorizontally)
+                        .padding(top = 8.dp),
+                    fontFamily = fontFamily
+                )
+                Text(
+                    text = "Internals",
+                    fontSize = 20.sp,
+                    modifier = Modifier
+                        .padding(top = 4.dp),
+                    fontFamily = fontFamily
+                )
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                ) {
+                    Text(
+                        text = "SUBJECTS",
+                        fontFamily = fontFamily,
+                        fontSize = 20.sp,
+                        fontWeight = FontWeight.SemiBold
+                    )
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        horizontalArrangement = Arrangement.End
+                    ) {
+                        Text(
+                            text = "MARKS",
+                            fontFamily = fontFamily,
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.SemiBold
+                        )
+                    }
+                }
+                PrintInternalsPA(
+                    outoff = outoff30,
+                    name1 = name1, code1 = code1, m1 = m1,
+                    name2 = name2, code2 = code2, m2 = m2,
+                    name3 = name3, code3 = code3, m3 = m3,
+                    name4 = name4, code4 = code4, m4 = m4,
+                    name5 = name5, code5 = code5, m5 = m5,
+                    name6 = name6, code6 = code6, m6 = m6,
+                    name7 = name7, code7 = code7, m7 = m7,
+                    name8 = name8, code8 = code8, m8 = m8,
+                    name9 = name9, code9 = code9, m9 = m9,
+                    name10 = name10, code10 = code10, m10 = m10
+                )
+                Divider()
+                Text(
+                    text = "Progressive Assessment",
+                    fontSize = 20.sp,
+                    modifier = Modifier
+                        .padding(top = 4.dp),
+                    fontFamily = fontFamily
+                )
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                ) {
+                    Text(
+                        text = "SUBJECTS",
+                        fontFamily = fontFamily,
+                        fontSize = 20.sp,
+                        fontWeight = FontWeight.SemiBold
+                    )
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        horizontalArrangement = Arrangement.End
+                    ) {
+                        Text(
+                            text = "MARKS",
+                            fontFamily = fontFamily,
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.SemiBold
+                        )
+                    }
+                }
+                PrintInternalsPA(
+                    outoff = outoff25,
+                    name1 = name1, code1 = code1, m1 = mm1,
+                    name2 = name2, code2 = code2, m2 = mm2,
+                    name3 = name3, code3 = code3, m3 = mm3,
+                    name4 = name4, code4 = code4, m4 = mm4,
+                    name5 = name5, code5 = code5, m5 = mm5,
+                    name6 = name6, code6 = code6, m6 = mm6,
+                    name7 = name7, code7 = code7, m7 = mm7,
+                    name8 = name8, code8 = code8, m8 = mm8,
+                    name9 = name9, code9 = code9, m9 = mm9,
+                    name10 = name10, code10 = code10, m10 = mm10
+                )
+                Spacer(modifier = Modifier.padding(bottom = 8.dp))
+            }
+        }
+    }
+}

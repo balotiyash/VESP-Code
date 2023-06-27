@@ -1,0 +1,307 @@
+package com.balotiyash.vespresult
+
+import android.annotation.SuppressLint
+import android.content.Intent
+import android.net.Uri
+import androidx.compose.animation.Animatable
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.Tab
+import androidx.compose.material.TabRow
+import androidx.compose.material.Text
+import androidx.compose.material.rememberScaffoldState
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.TabRowDefaults
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.balotiyash.vespresult.ui.theme.Brown
+import com.balotiyash.vespresult.ui.theme.DarkYellow
+import com.balotiyash.vespresult.ui.theme.LightYellow
+import com.balotiyash.vespresult.ui.theme.VESPResultTheme
+import com.google.accompanist.pager.ExperimentalPagerApi
+import com.google.accompanist.pager.HorizontalPager
+import com.google.accompanist.pager.pagerTabIndicatorOffset
+import com.google.accompanist.pager.rememberPagerState
+import kotlinx.coroutines.launch
+import androidx.compose.material.ScaffoldState
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+
+@SuppressLint("RememberReturnType")
+@OptIn(ExperimentalPagerApi::class)
+@Composable
+fun HorizontalTabSlider(scaffoldState: ScaffoldState) {
+    val tabItems = listOf("I", "II", "III", "IV", "V", "VI")
+    val pagerState = rememberPagerState()
+    val coroutineScope = rememberCoroutineScope()
+
+    val context = LocalContext.current
+    val intent = remember { Intent(Intent.ACTION_VIEW, Uri.parse("https://msbte.org.in/pcwebBTRes/pcResult01/pcfrmViewMSBTEResult.aspx")) }
+
+    val fontFamily = FontFamily(Font(R.font.comicneue_regular))
+
+    Column(
+        modifier = Modifier
+//            .verticalScroll(rememberScrollState())
+    ) {
+        Text(
+            text = "Select Your Semester",
+            modifier = Modifier
+                .align(alignment = Alignment.CenterHorizontally)
+                .padding(top = 64.dp)
+        )
+        TabRow(
+            selectedTabIndex = pagerState.currentPage,
+            backgroundColor = DarkYellow,//Malibu,
+            modifier = Modifier
+//                .padding(20.dp /*top = 310.dp, start = 20.dp, end = 20.dp*/)
+                .padding(20.dp, 8.dp, 20.dp, 20.dp)
+                .background(color = Color.Transparent)
+                .clip(RoundedCornerShape(30.dp)),
+//                .verticalScroll(rememberScrollState()),
+            indicator = {
+                tabPositions -> TabRowDefaults.Indicator(
+                Modifier
+                    .pagerTabIndicatorOffset(pagerState, tabPositions)
+                    .width(0.dp)
+                    .height(0.dp)
+                )
+            }
+        ) {
+            tabItems.forEachIndexed { index, title ->
+                val color = remember {
+                    Animatable(Brown)//(DarkYellow)//(Denim)
+                }
+                LaunchedEffect(pagerState.currentPage == index) {
+                    color.animateTo(if(pagerState.currentPage == index) /*Color.White*/ LightYellow else DarkYellow/*Malibu*/)
+                }
+
+                Tab (
+                    text = {
+                        Text(
+                            title,
+                            style = if (pagerState.currentPage == index)
+                                TextStyle(
+                                    color = Brown,//DarkYellow,//Denim,
+                                    fontSize = 18.sp
+                                )
+                            else TextStyle(
+                                color = Brown,//DarkYellow,//Denim,
+                                fontSize = 16.sp
+                            )
+                        )
+                    },
+                    selected = pagerState.currentPage == index,
+                    modifier = Modifier
+                        .background(
+                            color = color.value,
+                            shape = RoundedCornerShape(30.dp)
+                        ),
+                    onClick = {
+                        coroutineScope.launch {
+                            pagerState.animateScrollToPage(index)
+                        }
+                    }
+                )
+            }
+        }
+
+        HorizontalPager(count = tabItems.size,
+        state = pagerState,
+            modifier = Modifier
+                .fillMaxSize()
+                .background(color = Color.White)
+                .verticalScroll(rememberScrollState()),
+//            verticalAlignment = Alignment.Top
+        ) { page ->
+            Column(
+                modifier = Modifier
+                    .fillMaxSize(),
+            ) {
+                when (tabItems[page]) {
+                    "I" -> printEmpty()
+                    "II" -> printEmpty()
+                    "III" -> {
+                        ClassTestMarksheet(
+                            ct = 1,
+                            name1 = "OOP", code1 = 22316, m1 = 13,
+                            name2 = "DSU", code2 = 22317, m2 = 16,
+                            name3 = "CGR", code3 = 22318, m3 = 17,
+                            name4 = "DMS", code4 = 22319, m4 = 17,
+                            name5 = "DTE", code5 = 22320, m5 = 19,
+                            name6 = null, code6 = null, m6 = null,
+                            name7 = null, code7 = null, m7 = null,
+                            name8 = null, code8 = null, m8 = null,
+                            name9 = null, code9 = null, m9 = null,
+                            name10 = null, code10 = null, m10 = null,
+                            urll = "https://drive.google.com/file/d/1C7OmY_qDyGHEnB--tF_dNmWcI2muF9QM/view?usp=drive_link"
+                        )
+                        ClassTestMarksheet(
+                            ct = 2,
+                            name1 = "OOP", code1 = 22316, m1 = 20,
+                            name2 = "DSU", code2 = 22317, m2 = 20,
+                            name3 = "CGR", code3 = 22318, m3 = 19,
+                            name4 = "DMS", code4 = 22319, m4 = 20,
+                            name5 = "DTE", code5 = 22320, m5 = 20,
+                            name6 = null, code6 = null, m6 = null,
+                            name7 = null, code7 = null, m7 = null,
+                            name8 = null, code8 = null, m8 = null,
+                            name9 = null, code9 = null, m9 = null,
+                            name10 = null, code10 = null, m10 = null,
+                            urll = "https://drive.google.com/file/d/1zNoWXdoKR4L46mwrm65ICxtV9-Oe-Ec3/view?usp=drive_link"
+                        )
+                        InternalsPA(
+                            outoff30 = 30, outoff25 = 25,
+                            name1 = "OOP", code1 = 22316, m1 = 24, mm1 = 23,
+                            name2 = "DSU", code2 = 22317, m2 = 27, mm2 = 23,
+                            name3 = "CGR", code3 = 22318, m3 = 27, mm3 = 25,
+                            name4 = "DMS", code4 = 22319, m4 = 28, mm4 = 21,
+                            name5 = "DTE", code5 = 22320, m5 = 29, mm5 = 21,
+                            name6 = null, code6 = null, m6 = null, mm6 = null,
+                            name7 = null, code7 = null, m7 = null, mm7 = null,
+                            name8 = null, code8 = null, m8 = null, mm8 = null,
+                            name9 = null, code9 = null, m9 = null, mm9 = null,
+                            name10 = null, code10 = null, m10 = null, mm10 = null
+                        )
+
+                        Button(
+                            onClick = { context.startActivity(intent) },
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = Color(0xFFFFC107),
+                                contentColor = Color(0xFF6D4C41)
+                            ),
+                            modifier = Modifier
+                                .align(alignment = Alignment.CenterHorizontally)
+                                .padding(bottom = 8.dp)
+                        ) {
+                            Text(text = "ESE Marksheet", fontFamily = fontFamily)
+                        }
+                    }
+                    "IV" -> {
+                        ClassTestMarksheet(
+                            ct = 1,
+                            name1 = "JPR", code1 = 22412, m1 = 20,
+                            name2 = "SEN", code2 = 22413, m2 = 18,
+                            name3 = "DCC", code3 = 22414, m3 = 20,
+                            name4 = "MIC", code4 = 22415, m4 = 18,
+                            name5 = "GAD", code5 = 22034, m5 = null,
+                            name6 = null, code6 = null, m6 = null,
+                            name7 = null, code7 = null, m7 = null,
+                            name8 = null, code8 = null, m8 = null,
+                            name9 = null, code9 = null, m9 = null,
+                            name10 = null, code10 = null, m10 = null,
+                            urll = "https://drive.google.com/file/d/1xxaTjC58t0Grf4m_KpUeEr8AboK1S9v9/view?usp=drive_link"
+                        )
+                        ClassTestMarksheet(
+                            ct = 2,
+                            name1 = "JPR", code1 = 22412, m1 = 20,
+                            name2 = "SEN", code2 = 22413, m2 = 19,
+                            name3 = "DCC", code3 = 22414, m3 = 16,
+                            name4 = "MIC", code4 = 22415, m4 = 18,
+                            name5 = "GAD", code5 = 22034, m5 = null,
+                            name6 = null, code6 = null, m6 = null,
+                            name7 = null, code7 = null, m7 = null,
+                            name8 = null, code8 = null, m8 = null,
+                            name9 = null, code9 = null, m9 = null,
+                            name10 = null, code10 = null, m10 = null,
+                            urll = "https://drive.google.com/file/d/12X1tP8tBTg7OXzL4o8u3D_lth9YrWMgM/view?usp=drive_link"
+                        )
+                        InternalsPA(
+                            outoff30 = 30, outoff25 = 25,
+                            name1 = "JPR", code1 = 22412, m1 = 28, mm1 = 24,
+                            name2 = "SEN", code2 = 22413, m2 = 27, mm2 = 24,
+                            name3 = "DCC", code3 = 22414, m3 = 28, mm3 = 23,
+                            name4 = "MIC", code4 = 22415, m4 = 26, mm4 = 23,
+                            name5 = "GAD", code5 = 22034, m5 = null, mm5 = null,
+                            name6 = null, code6 = null, m6 = null, mm6 = null,
+                            name7 = null, code7 = null, m7 = null, mm7 = null,
+                            name8 = null, code8 = null, m8 = null, mm8 = null,
+                            name9 = null, code9 = null, m9 = null, mm9 = null,
+                            name10 = null, code10 = null, m10 = null, mm10 = null
+                        )
+                        val scope = rememberCoroutineScope()
+                        Button(
+                            onClick = {
+                                scope.launch {
+                                    scaffoldState.snackbarHostState.showSnackbar(
+                                        "Result not declared yet!!"
+                                    )
+                                }
+                            },
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = Color(0xFFFFC107),
+                                contentColor = Color(0xFF6D4C41)
+                            ),
+                            modifier = Modifier
+                                .align(alignment = Alignment.CenterHorizontally)
+                                .padding(bottom = 8.dp)
+                        ) {
+                            Text(text = "ESE Marksheet", fontFamily = fontFamily)
+                        }
+                    }
+                    "V" -> printEmpty()
+                    "VI" -> printEmpty()
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun printEmpty() {
+    Text(
+        text = "Not appeared for the exams!!",
+        color = Color.LightGray,
+//        fontSize = 8.sp
+        textAlign= TextAlign.Center,
+        modifier = Modifier.fillMaxSize()
+    )
+}
+
+@Composable
+fun CreateSnackBar(scaffoldState: ScaffoldState) {
+    val scope = rememberCoroutineScope()
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 20.dp),
+        horizontalArrangement = Arrangement.Center
+    ) {
+        Button(onClick = {
+            scope.launch {
+                scaffoldState.snackbarHostState.showSnackbar(
+                    "Result not declared yet!!"
+                )
+            }
+        }) {
+            Text(
+                text = "Show SnackBar"
+            )
+        }
+    }
+}
