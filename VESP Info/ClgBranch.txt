@@ -1,0 +1,34 @@
+package com.balotiyash.vespclginfo
+
+data class ClgBranch(
+    val desc: String,
+    val imgUri: Int
+)
+
+val branchList = listOf(
+    ClgBranch(
+        "Automation & Robotics (AO)",
+        R.drawable.robotics_pana
+    ),
+    ClgBranch(
+        "Civil Engineering (CE)",
+        R.drawable.civil_photoroom_png_photoroom
+    ),
+    ClgBranch(
+        "Computer Engineering (CO)",
+        R.drawable.programming_amico
+    ),
+    ClgBranch(
+        "Electrical Engineering (EE)",
+        R.drawable.electrical_photoroom_png_photoroom
+    ),
+    ClgBranch(
+        "Electronic Engineering (EJ)",
+        R.drawable.printed_circuit_board_rafiki
+    ),
+    ClgBranch(
+        "Mechanical Engineering (ME)",
+        R.drawable._207890_40796_photoroom_png_photoroom
+    )
+)
+

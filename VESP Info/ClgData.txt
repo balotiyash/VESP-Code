@@ -1,0 +1,31 @@
+package com.balotiyash.vespclginfo.model
+
+import com.balotiyash.vespclginfo.R
+
+data class ClgData(
+    val desc: String,
+    val imgUri: Int
+)
+
+val clgList = listOf(
+    ClgData(
+        "VES Polytechnic",
+        R.drawable.vesp1
+    ),
+    ClgData(
+        "VES Polytechnic",
+        R.drawable.vesp2
+    ),
+    ClgData(
+        "Anvesh 2023",
+        R.drawable.vesp3
+    ),
+    ClgData(
+        "VES Sports Ground",
+        R.drawable.vesp4
+    ),
+    ClgData(
+        "Technothon 2023",
+        R.drawable.vesp5
+    )
+)//
