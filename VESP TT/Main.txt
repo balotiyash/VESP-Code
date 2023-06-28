@@ -1,0 +1,245 @@
+package com.balotiyash.vespclgtimetable
+
+import android.content.Intent
+import android.net.Uri
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.scale
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.balotiyash.vespclgtimetable.ui.theme.VESPClgTimetableTheme
+
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            VESPClgTimetableTheme {
+                // A surface container using the 'background' color from the theme
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
+                    ClgTT()
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun ClgTT() {
+    val context = LocalContext.current
+    val ct1 = "https://ves.ac.in/polytechnic/wp-content/uploads/2023/03/CT1-TT-AY2022-23.pdf"
+    val ct2 = "https://ves.ac.in/polytechnic/wp-content/uploads/2023/04/CT2-TT-AY2022-23.pdf"
+    val esep = "https://drive.google.com/file/d/1RNQJwAyb1iYRmQR68882T51hXqIuDUu8/view?usp=drive_link"
+    val eset = "https://online.msbte.co.in/msbte22/reportsindex.php?act=time_table_s&sub=print_tt"
+    val intent1 = remember { Intent(Intent.ACTION_VIEW, Uri.parse(ct1)) }
+    val intent2 = remember { Intent(Intent.ACTION_VIEW, Uri.parse(ct2)) }
+    val intent3 = remember { Intent(Intent.ACTION_VIEW, Uri.parse(esep)) }
+    val intent4 = remember { Intent(Intent.ACTION_VIEW, Uri.parse(eset)) }
+    val fontFamily = FontFamily(Font(R.font.comicneue_regular))
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.White),
+        verticalArrangement = Arrangement.Center
+    ) {
+        Text(
+            text = "Regular class time table - CO4IA",
+            modifier = Modifier
+                .align(alignment = Alignment.CenterHorizontally),
+            fontSize = 16.sp,
+            fontFamily = fontFamily
+            )
+        Card(
+            modifier = Modifier
+                .padding(horizontal = 8.dp)
+                .shadow(
+                    elevation = 8.dp,
+                    clip = true,
+                    ambientColor = Color(0xFFFFC107),
+                    spotColor = Color.Gray
+                )
+                .border(1.dp, Color.Black, RectangleShape),
+            shape = RectangleShape
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.classtt),
+                contentDescription = null,
+                modifier = Modifier
+                    .fillMaxWidth(),
+                contentScale = ContentScale.FillWidth
+            )
+        }
+        Spacer(modifier = Modifier.padding(vertical = 12.dp))
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 12.dp, bottom = 8.dp),
+            horizontalArrangement = Arrangement.SpaceEvenly,
+        ) {
+            Button(
+                onClick = {
+                    context.startActivity(intent1)
+                },
+                modifier = Modifier
+                    .width(160.dp)
+                    .shadow(
+                        elevation = 8.dp,
+                        shape = RoundedCornerShape(20.dp),
+                        clip = true,
+                        ambientColor = Color.White,
+                        spotColor = Color.Red
+                    ),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color(0xFFFFC107),
+                    contentColor = Color(0xFF6D4C41))
+            ) {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(
+                        text = "Class Test I\nTime Table",
+                        textAlign = TextAlign.Center,
+                        fontSize = 16.sp,
+                        fontFamily = fontFamily,
+                        fontWeight = FontWeight.SemiBold
+                    )
+                }
+            }
+            Button(
+                onClick = {
+                    context.startActivity(intent2)
+                },
+                modifier = Modifier
+                    .width(160.dp)
+                    .shadow(
+                        elevation = 8.dp,
+                        shape = RoundedCornerShape(20.dp),
+                        clip = true,
+                        ambientColor = Color.White,
+                        spotColor = Color.Red
+                    ),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color(0xFFFFC107),
+                    contentColor = Color(0xFF6D4C41)),
+//                shape = RoundedCornerShape(20.dp)
+            ) {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(
+                        text = "Class Test II\nTime Table",
+                        textAlign = TextAlign.Center,
+                        fontSize = 16.sp,
+                        fontFamily = fontFamily,
+                        fontWeight = FontWeight.SemiBold
+                    )
+                }
+            }
+        }
+        Spacer(modifier = Modifier.padding(vertical = 12.dp))
+        Row(
+            modifier = Modifier
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly,
+        ) {
+            Button(
+                onClick = { context.startActivity(intent3) },
+                modifier = Modifier
+                    .width(160.dp)
+                    .shadow(
+                        elevation = 8.dp,
+                        shape = RoundedCornerShape(20.dp),
+                        clip = true,
+                        ambientColor = Color.White,
+                        spotColor = Color.Red
+                    ),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color(0xFFFFC107),
+                    contentColor = Color(0xFF6D4C41)
+                )
+            ) {
+                Text(
+                    text = "ESE Practical\nTime Table",
+                    textAlign = TextAlign.Center,
+                    fontSize = 16.sp,
+                    fontFamily = fontFamily,
+                    fontWeight = FontWeight.SemiBold
+                )
+            }
+            Button(
+                onClick = { context.startActivity(intent4) },
+                modifier = Modifier
+                    .width(160.dp)
+                    .shadow(
+                        elevation = 8.dp,
+                        shape = RoundedCornerShape(20.dp),
+                        clip = true,
+                        ambientColor = Color.White,
+                        spotColor = Color.Red
+                    ),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color(0xFFFFC107),
+                    contentColor = Color(0xFF6D4C41)
+                )
+            ) {
+                Text(
+                    text = "ESE Theory\nTime Table",
+                    textAlign = TextAlign.Center,
+                    fontSize = 16.sp,
+                    fontFamily = fontFamily,
+                    fontWeight = FontWeight.SemiBold
+                )
+            }
+        }
+    }
+}
+
+@Preview(
+    showBackground = true,
+    showSystemUi = true
+)
+@Composable
+fun GreetingPreview() {
+    VESPClgTimetableTheme {
+        ClgTT()
+    }
+}
